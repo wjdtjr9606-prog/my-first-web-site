@@ -1,0 +1,339 @@
+<html lang="ko">
+<head>
+<title>이력서 양식</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="base.css" />
+<script src="jquery-3.3.1.min.js"></script>
+<style>
+h1 {
+	font-size: 40px;
+	border-bottom: 25px solid rgb(190, 187, 187);
+	margin: 0px;
+	width:1000px;
+	text-align: center;
+}
+
+td, th {
+	padding: 2px;
+	height: 35px;
+	border: 2px solid black;
+	font-size: 16px;
+}
+
+input {
+	/*border:1px solid red;*/
+}
+
+th {
+	background-color: rgb(190, 187, 187);
+}
+
+table {
+	width: 1000px;
+	height: 300px;
+	border-collapse: collapse;
+	border: 1px solid black;
+	font-size: 14px;
+}
+
+.table2 {
+	width: 1000px;
+	height: 80px;
+}
+.table3 {
+	width: 1000px ;
+	height: 250px ;
+}
+.table4 {
+	width: 1000px;
+	height: 280px;
+}
+.table5 {
+	width: 1000px;
+	height: 150px;
+}
+</style>
+<script>
+// numberMaxLength : ㅁㄴㅇ라ㅓ민알
+function numberMaxLength(e) {
+	if (e.value.length > e.maxLength) {
+		e.value = e.value.slice(0, e.maxLength);
+	}
+}
+
+// fn_save : 등록하기
+function fn_save() {
+	//alert("hellow!!");
+	
+	//alert(   $("#nameKor").val()   );
+	
+//	$("#nameKor")
+	
+//	$("input[id='nameKor']")
+//	$("input[id='nameKor']")
+	if ($("input[id='nameKor']").val() == "") {
+		alert("성명 한글을 입력하세요.");
+		$("input[id='nameKor']").focus();
+	}
+}
+</script>
+
+</head>
+
+<body>
+	<h1>이 력 서</h1>
+	<h2>1.기초 자료</h2>
+
+	<form id="firstForm" name="firstForm">
+	<table>
+	<tr>
+			<td rowspan="3" style="width:150px"><img src="Seok.jpg" width=200px /></td>
+			<th rowspan="2" style="width:100px">성 명</th>
+			<th style width="100px">한 글</th>
+			<td style="width:350px">
+				<input type="text" size="10" id="nameKor" name="nameKor" value="" placeholder="홍길동" />
+			</td>
+			<th style="width:100px">성 별</th>
+			<td>
+				<input type="radio" id="gender" name="gender" value="male" checked />남성
+  				<input type="radio" id="gender" name="gender" value="female" />여성
+			</td>
+	</tr>
+	<tr>
+		<th>영 문</th>
+		<td><input type="text" size="15" id="nameEng" name="nameEng"
+				   value="" placeholder="HONG GILDONG" />
+		</td>
+		<th>연 령</th>
+		<td>만<input type="number" id="age" name="age" value="" maxlength="3" oninput="numberMaxLength(this);" style="width:40px" />
+			세
+		</td>
+	</tr>
+	<tr>
+		<th colspan="2">주민등록번호</th>
+		<td>
+			<input type="number" id="frontIDnumber" name="frontIDnumber" maxlength="6" style="width:100px" oninput="numberMaxLength(this);" />-
+			<input type="password" id="backIDnumber" name="backIDnumber" maxlength="7" style="width:100px" oninput="numberMaxLength(this);" />
+		</td>
+		<th>생년월일</th>
+		<td>
+			<input type="radio" id="birth" name="birth" value="solar calendar" />양력
+			<input type="radio" id="birth" name="birth" value="lunar calendar" />음력
+			<input type="text" id="birthday" name="birthday" />입력 예시)19000101
+		</td>
+	</tr>
+	<tr>
+		<th>본 적</th>
+		<td colspan="7"><input type="text" id="family register" name="family register" value="" size="50" /></td>
+	</tr>
+	<tr>
+		<th>본 주 소</th>
+		<td colspan="7"><input type="text" id="address" name="address" value="" size="50" /></td>
+	</tr>
+	</table>
+
+	<table class="table2">
+	<tr>
+		<th rowspan="2" style="width:150px;">연 락 처</th>
+		<th style="width:120px">전화번호</th>
+		<td><input type="number" id="call number" name="call number" value=""></td>
+		<th style="width:120px">E-mail</th>
+		<td><input type="text" id="E-mail ID" name="E-mail ID" value="" size="15">
+			@<input type="text" id="E-mail domain" name="E-mail domain" value="" size="15"></td>
+	</tr>
+	<tr>
+		<th>휴 대 폰</th>
+		<td>
+			<select>
+				<option value="010">010</option>
+				<option value="011">011</option>
+				<option value="016" selected>016</option>
+				<option value="017">017</option>
+				<option value="018">018</option>
+				<option value="019">019</option>
+			</select>-
+			<input type="number" placeholder="12345678" id="phoneNumber" name="phonenumber" value=""
+             maxlength="8" oninput="numberMaxLength(this);"/>
+		</td>
+		<th>Homepage</th>
+		<td><input type="text" size="40"></td>
+	</tr>
+	</table>
+	</form>
+
+	<h2>2.신상 자료</h2>
+
+	<table class="table3">
+	<tr>
+		<th style="width:100px;">신체사항</th>
+		<th style="width:60px;">신 장</th>
+		<td style="width:100px;"><input type="number" id="height" name="height" value="" style="width:60px"/>cm</td>
+		<th style="width:60px;">체 중</th>
+		<td style="width:100px;"><input type="number" id="weight" name="weight" value="" style="width:60px"/>kg</td>
+		<th style="width:60px;">시 력</th>
+		<td style="width:100px;">
+			좌:<input type="number" id="leftVision" name="Left vision" value="" style="width:50px"/><br>
+			우:<input type="number" id="rightVision" name="Left vision" value="" style="width:50px"/>
+		</td>
+		<th style="width:60px;">혈액형</th>
+		<td style="width:100px;">
+			<select id="Blood Type" name="bloodType">
+				<option value="" selected>==선택==</option>
+				<option value="A">A형</option>
+				<option value="B">B형</option>
+				<option value="AB">AB형</option>
+				<option value="O">O형</option>
+			</select>
+		</td>
+		<th style="width:60px;">결 혼</th>
+		<td style="width:100px;">
+				<input type="radio" id="marriage" name="marriage" value="unmarried" />미혼<br>
+				<input type="radio" id="marriage" name="marriage" value="married" />기혼
+		</td>
+	</tr>
+	<tr>
+		<th style="width:60px;">가족관계</th>
+		<td colspan="4"><input type="text" id="familyRelationship" name="family relationship" value="" size="40" /></td>
+		<th style="width:60px;">주거형태</th>
+		<td colspan="5"><input type="text" id="housingType" name="housing type" value="" size="15" /></td>
+	</tr>
+	<tr>
+		<th style="width:60px;">병역구분</th>
+		<td colspan="4">
+			<input type="radio" id="military service Y" name="military service" value="military Y" />필<br>
+		  <input type="radio" id="military service N" name="military service" value="military N" />미필
+		</td>
+		<th style="width:60px;">면제사유</th>
+		<td colspan="5"><input type="text" id="exemption" name="exemption" value="" size="25"></td>
+	</tr>
+	<tr>
+		<th style="width:60px;">군 필</th>
+		<td colspan="4"><input type="text" id="military" name="military" value="" size="10"></td>
+		<th style="width:60px;">계 급</th>
+		<td colspan="2"><input type="text" id="rank" name="rank" value="" size="10"></td>
+		<th style="width:60px;">복무기간</th>
+		<td colspan="2"><input type="number" style="width:80px" />년<input type="number" style="width:40px" />월-<br>
+		<input type="number" style="width:80px" />년<input type="number" style="width:40px" />월
+	  </td>
+	</tr>
+	<tr>
+		<th style="width:60px;">종 교</th>
+		<td colspan="4"><input type="text" id="religion" name="religion" value="" size="10"></td>
+		<th style="width:60px;">취 미</th>
+		<td colspan="2"><input type="text" id="hobby" name="hobby" value="" size="20"></td>
+		<th style="width:60px;">특 기</th>
+		<td colspan="2"><input type="text" id="specialty" name="specialty" value="" size="20"></td>
+	</tr>
+	</table>
+
+	<h2>3.가족 사항</h2>
+
+	<table class="table4">
+	<tr>
+	<th>관 계 </th>
+	<th>성 명</th>
+	<th>연 령</th>
+	<th>최종 학력</th>
+	<th>근 무 처</th>
+	<th>직위</th>
+	<th>동거 여부</th>
+	</tr>
+	<tr>
+		<td><input type="text" size="10" id="family A relations" name="family A relations" value=""></td>
+		<td><input type="text" size="10" id="family A" name="family A" value=""></td>
+		<td>만 <input type="number" id="family A age" name="family A age" value="" style="width:40px" />세</td>
+		<td><input type="text" id="family A academic" name="family A academic" value="" size="10"></td>
+		<td><input type="text" id="family A Job" name="family A Job" value=""></td>
+		<td><input type="text" id="family A job position" name="family A job position" value="" size="10"></td>
+		<td><input type="radio" id="living with family A" name="living with family A" value="living together family A" />O
+	      <input type="radio" id="living with family A "name="living with family A" value="not living together family A" />X
+	 </td>
+	</tr>
+	<tr>
+		<td><input type="text" size="10" id="family B relations" name="family B relations" value=""></td>
+		<td><input type="text" size="10" id="family B" name="family B" value=""></td>
+		<td>만 <input type="number" id="family B age" name="family B age" value="" style="width:40px" />세</td>
+		<td><input type="text" id="family B academic" name="family B academic" value="" size="10"></td>
+		<td><input type="text" id="family B Job" name="family B Job" value=""></td>
+		<td><input type="text" id="family B job position" name="family B job position" value="" size="10"></td>
+		<td><input type="radio" id="living with family B" name="living with family B" value="living together family B" />O
+	      <input type="radio" id="living with family B "name="living with family B" value="not living together family B" />X
+	</tr>
+	<tr>
+		<td><input type="text" size="10" id="family C relations" name="family C relations" value=""></td>
+		<td><input type="text" size="10" id="family C" name="family C" value=""></td>
+		<td>만 <input type="number" id="family C age" name="family C age" value="" style="width:40px" />세</td>
+		<td><input type="text" id="family C academic" name="family C academic" value="" size="10"></td>
+		<td><input type="text" id="family C Job" name="family C Job" value=""></td>
+		<td><input type="text" id="family C job position" name="family C job position" value="" size="10"></td>
+		<td><input type="radio" id="living with family C" name="living with family C" value="living together family C" />O
+	      <input type="radio" id="living with family C "name="living with family C" value="not living together family C" />X
+	</tr>
+	<tr>
+		<td><input type="text" size="10" id="family D relations" name="family D relations" value=""></td>
+		<td><input type="text" size="10" id="family D" name="family D" value=""></td>
+		<td>만 <input type="number" id="family D age" name="family D age" value="" style="width:40px" />세</td>
+		<td><input type="text" id="family D academic" name="family D academic" value="" size="10"></td>
+		<td><input type="text" id="family D Job" name="family D Job" value=""></td>
+		<td><input type="text" id="family D job position" name="family D job position" value="" size="10"></td>
+		<td><input type="radio" id="living with family D" name="living with family D" value="living together family D" />O
+	      <input type="radio" id="living with family D "name="living with family D" value="not living together family D" />X
+	</tr>
+	<tr>
+		<td><input type="text" size="10" id="family E relations" name="family E relations" value=""></td>
+		<td><input type="text" size="10" id="family E" name="family E" value=""></td>
+		<td>만 <input type="number" id="family E age" name="family E age" value="" style="width:40px" />세</td>
+		<td><input type="text" id="family E academic" name="family E academic" value="" size="10"></td>
+		<td><input type="text" id="family E Job" name="family E Job" value=""></td>
+		<td><input type="text" id="family E job position" name="family E job position" value="" size="10"></td>
+		<td><input type="radio" id="living with family E" name="living with family E" value="living together family E" />O
+	      <input type="radio" id="living with family E "name="living with family E" value="not living together family E" />X
+	</tr>
+	</table>
+
+	<h2>4.학력 사항</h2>
+
+	<table class="table5">
+		<tr>
+			<th>기간</th>
+			<th>출신 학교</th>
+			<th>전 공</th>
+			<th>소재지</th>
+			<th>기 타</th>
+		</tr>
+		<tr>
+			<td>
+				<input type="number" id="year of schoolA begin" name="year of schoolA begin" value="" style="width:80px" />년
+				<input type="number" id="month of schoolA begin" name="month of schoolA begin" value="" style="width:40px" />월-<br>
+			  <input type="number" id="year of schoolA end" name="year of schoolA end" value="" style="width:80px" />년
+				<input type="number" id="month of schoolA end" name="month of schoolA end" value="" style="width:40px" />월
+		  </td>
+			<td><input type="text" id="schoolA" name="schoolA" value="" size="15" /></td>
+			<td><input type="text" id="schoolA major" name="schoolA major" value="" size="15" /></td>
+			<td><input type="text" id="schoolA address" name="schoolA address" value="" size="15" /></td>
+			<td><input type="text" id="schoolA etc" name="schoolA etc" value="" size="15" /></td>
+		</tr>
+		<tr>
+			<td>
+				<input type="number" id="year of schoolB begin" name="year of schoolB begin" value="" style="width:80px" />년
+				<input type="number" id="month of schoolB begin" name="month of schoolB begin" value="" style="width:40px" />월-<br>
+			  <input type="number" id="year of schoolB end" name="year of schoolB end" value="" style="width:80px" />년
+				<input type="number" id="month of schoolB end" name="month of schoolB end" value="" style="width:40px" />월
+		  </td>
+			<td><input type="text" id="schoolB" name="schoolB" value="" size="15" /></td>
+			<td><input type="text" id="schoolB major" name="schoolB major" value="" size="15" /></td>
+			<td><input type="text" id="schoolB address" name="schoolB address" value="" size="15" /></td>
+			<td><input type="text" id="schoolB etc" name="schoolB etc" value="" size="15" /></td>
+	 </tr>
+	</table>
+	<br />
+	<br />
+	
+	<div>
+		<a href="#none" onClick="fn_save();">등록하기</a>
+	</div>
+	<br />
+	<br />
+</body>
+
+</html>
