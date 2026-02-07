@@ -2,67 +2,11 @@
 <head>
 <title>이력서 양식</title>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="base.css" />
+<link rel="stylesheet" href="style.css" />
 <script src="jquery-3.3.1.min.js"></script>
-<style>
-h1 {
-	font-size: 40px;
-	border-bottom: 25px solid rgb(190, 187, 187);
-	margin: 0px;
-	width:1000px;
-	text-align: center;
-}
 
-td, th {
-	padding: 3px;
-	height: 35px;
-	border: 2px solid black;
-	font-size: 16px;
-}
-
-input {
-	/*border:1px solid red;*/
-}
-
-th {
-	background-color: rgb(190, 187, 187);
-}
-
-table {
-	width: 1000px;
-	height: 300px;
-	border-collapse: collapse;
-	border: 1px solid black;
-	font-size: 14px;
-}
-
-.table2 {
-	width: 1000px;
-	height: 80px;
-}
-
-.table3 {
-	width: 1000px ;
-	height: 250px ;
-}
-
-.table4 {
-	width: 1000px;
-	height: 280px;
-}
-
-.table5 {
-	width: 1000px;
-	height: 150px;
-}
-
-#register {
-	font-size: 18px;
-
-}
-</style>
 <script>
-// numberMaxLength : ㅁㄴㅇ라ㅓ민알
+// numberMaxLength : 숫자 자리 수 제한
 function numberMaxLength(e) {
 	if (e.value.length > e.maxLength) {
 		e.value = e.value.slice(0, e.maxLength);
@@ -71,20 +15,14 @@ function numberMaxLength(e) {
 
 // fn_save : 등록하기
 function fn_save() {
-	//alert("hellow!!");
 
-	//alert(   $("#nameKor").val()   );
-
-//	$("#nameKor")
-
-//	$("input[id='nameKor']")
-//	$("input[id='nameKor']")
 	if ($("input[id='nameKor']").val() == "") {
 		alert("성명 한글을 입력하세요.");
 		$("input[id='nameKor ']").focus();
 	}
 }
 
+// input 클릭하면 배경색 변경, input 벗어나면 배경색 원래대로
 $(document).ready(function(){
 
     $("input").focus(function(){
@@ -96,7 +34,6 @@ $(document).ready(function(){
     });
 
 });
-
 </script>
 
 </head>
@@ -219,7 +156,7 @@ $(document).ready(function(){
 			       maxlength="4" style="width:80px" oninput="numberMaxLength(this);"/>
 		</td>
 		<th>Homepage</th>
-		<td><input type="text" size="40"></td>
+		<td><input type="text" size="30"></td>
 	</tr>
 	</table>
 	</form>
@@ -285,7 +222,7 @@ $(document).ready(function(){
 		<th style="width:60px;">취 미</th>
 		<td colspan="2"><input type="text" id="hobby" name="hobby" value="" size="20"></td>
 		<th style="width:60px;">특 기</th>
-		<td colspan="2"><input type="text" id="specialty" name="specialty" value="" size="20"></td>
+		<td colspan="2"><input type="text" id="specialty" name="specialty" value="" size="15"></td>
 	</tr>
 	</table>
 
@@ -313,44 +250,44 @@ $(document).ready(function(){
 	 </td>
 	</tr>
 	<tr>
-		<td><input type="text" size="10" id="family B relations" name="family B relations" value=""></td>
-		<td><input type="text" size="10" id="family B" name="family B" value=""></td>
-		<td>만 <input type="number" id="family B age" name="family B age" value="" style="width:40px" />세</td>
-		<td><input type="text" id="family B academic" name="family B academic" value="" size="10"></td>
-		<td><input type="text" id="family B Job" name="family B Job" value=""></td>
-		<td><input type="text" id="family B job position" name="family B job position" value="" size="10"></td>
-		<td><input type="radio" id="living with family B" name="living with family B" value="living together family B" />O
-	      <input type="radio" id="living with family B "name="living with family B" value="not living together family B" />X
+		<td><input type="text" size="10" id="familyBrelations" name="familyBrelations" value=""></td>
+		<td><input type="text" size="10" id="familyB" name="familyB" value=""></td>
+		<td>만 <input type="number" id="familyBage" name="familyBage" value="" style="width:40px" />세</td>
+		<td><input type="text" id="familyBacademic" name="familyBacademic" value="" size="10"></td>
+		<td><input type="text" id="familyBJob" name="familyBJob" value=""></td>
+		<td><input type="text" id="familyBjobPosition" name="familyBjobPosition" value="" size="10"></td>
+		<td><input type="radio" id="livingWithFamilyB" name="livingWithFamilyB" value="livingTogetherFamilyB" />O
+	      <input type="radio" id="livingWithFamilyB"name="livingWithFamilyB" value="notLivingTogetherFamilyB" />X
 	</tr>
 	<tr>
-		<td><input type="text" size="10" id="family C relations" name="family C relations" value=""></td>
-		<td><input type="text" size="10" id="family C" name="family C" value=""></td>
-		<td>만 <input type="number" id="family C age" name="family C age" value="" style="width:40px" />세</td>
-		<td><input type="text" id="family C academic" name="family C academic" value="" size="10"></td>
-		<td><input type="text" id="family C Job" name="family C Job" value=""></td>
-		<td><input type="text" id="family C job position" name="family C job position" value="" size="10"></td>
-		<td><input type="radio" id="living with family C" name="living with family C" value="living together family C" />O
-	      <input type="radio" id="living with family C "name="living with family C" value="not living together family C" />X
+		<td><input type="text" size="10" id="familyCrelations" name="familyCrelations" value=""></td>
+		<td><input type="text" size="10" id="familyC" name="familyC" value=""></td>
+		<td>만 <input type="number" id="familyCage" name="familyCage" value="" style="width:40px" />세</td>
+		<td><input type="text" id="familyCacademic" name="familyCacademic" value="" size="10"></td>
+		<td><input type="text" id="familyCJob" name="familyCJob" value=""></td>
+		<td><input type="text" id="familyCjobPosition" name="familyCjobPosition" value="" size="10"></td>
+		<td><input type="radio" id="livingWithFamilyC" name="livingWithFamilyC" value="livingTogetherFamilyC" />O
+	      <input type="radio" id="livingWithFamilyC"name="livingWithFamilyC" value="notLivingTogetherFamilyC" />X
 	</tr>
 	<tr>
-		<td><input type="text" size="10" id="family D relations" name="family D relations" value=""></td>
-		<td><input type="text" size="10" id="family D" name="family D" value=""></td>
-		<td>만 <input type="number" id="family D age" name="family D age" value="" style="width:40px" />세</td>
-		<td><input type="text" id="family D academic" name="family D academic" value="" size="10"></td>
-		<td><input type="text" id="family D Job" name="family D Job" value=""></td>
-		<td><input type="text" id="family D job position" name="family D job position" value="" size="10"></td>
-		<td><input type="radio" id="living with family D" name="living with family D" value="living together family D" />O
-	      <input type="radio" id="living with family D "name="living with family D" value="not living together family D" />X
+		<td><input type="text" size="10" id="familyDrelations" name="familyDrelations" value=""></td>
+		<td><input type="text" size="10" id="familyD" name="familyD" value=""></td>
+		<td>만 <input type="number" id="familyDage" name="familyDage" value="" style="width:40px" />세</td>
+		<td><input type="text" id="familyDacademic" name="familyDacademic" value="" size="10"></td>
+		<td><input type="text" id="familyDJob" name="familyDJob" value=""></td>
+		<td><input type="text" id="familyDjobPosition" name="familyDjobPosition" value="" size="10"></td>
+		<td><input type="radio" id="livingWithFamilyD" name="livingWithFamilyD" value="livingTogetherFamilyD" />O
+	      <input type="radio" id="livingWithFamilyD"name="livingWithFamilyD" value="notLivingTogetherFamilyD" />X
 	</tr>
 	<tr>
-		<td><input type="text" size="10" id="family E relations" name="family E relations" value=""></td>
-		<td><input type="text" size="10" id="family E" name="family E" value=""></td>
-		<td>만 <input type="number" id="family E age" name="family E age" value="" style="width:40px" />세</td>
-		<td><input type="text" id="family E academic" name="family E academic" value="" size="10"></td>
-		<td><input type="text" id="family E Job" name="family E Job" value=""></td>
-		<td><input type="text" id="family E job position" name="family E job position" value="" size="10"></td>
-		<td><input type="radio" id="living with family E" name="living with family E" value="living together family E" />O
-	      <input type="radio" id="living with family E "name="living with family E" value="not living together family E" />X
+		<td><input type="text" size="10" id="familyErelations" name="familyErelations" value=""></td>
+		<td><input type="text" size="10" id="familyE" name="familyE" value=""></td>
+		<td>만 <input type="number" id="familyEage" name="familyEage" value="" style="width:40px" />세</td>
+		<td><input type="text" id="familyEacademic" name="familyEacademic" value="" size="10"></td>
+		<td><input type="text" id="familyEJob" name="familyEJob" value=""></td>
+		<td><input type="text" id="familyEjobPosition" name="familyEjobPosition" value="" size="10"></td>
+		<td><input type="radio" id="livingWithFamilyE" name="livingWithFamilyE" value="livingTogetherFamilyE" />O
+	      <input type="radio" id="livingWithFamilyE"name="livingWithFamilyE" value="notLivingTogetherFamilyE" />X
 	</tr>
 	</table>
 
@@ -393,8 +330,7 @@ $(document).ready(function(){
 	<br />
 
 	<div>
-		<input type="button" id="register" value="등록하기" href="#none" onClick="fn_save();"
-		style="margin-left:470px; margin-top:0px;">
+		<input type="button" id="register" value="등록하기" href="#none" onClick="fn_save();"style="margin-left:470px; margin-top:0px;">
 	</div>
 	<br />
 	<br />
