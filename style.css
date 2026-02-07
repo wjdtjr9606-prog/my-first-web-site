@@ -1,0 +1,55 @@
+h1 {
+	font-size: 40px;
+	border-bottom: 25px solid rgb(190, 187, 187);
+	margin: 0px;
+	width:1000px;
+	text-align: center;
+}
+
+td, th {
+	padding: 3px;
+	height: 35px;
+	border: 2px solid black;
+	font-size: 16px;
+}
+
+input {
+	/*border:1px solid red;*/
+}
+
+th {
+	background-color: rgb(190, 187, 187);
+}
+
+table {
+	width: 1000px;
+	height: 300px;
+	border-collapse: collapse;
+	border: 1px solid black;
+	font-size: 14px;
+}
+
+.table2 {
+	width: 1000px;
+	height: 80px;
+}
+
+.table3 {
+	width: 1000px ;
+	height: 250px ;
+}
+
+.table4 {
+	width: 1000px;
+	height: 280px;
+}
+
+.table5 {
+	width: 1000px;
+	height: 150px;
+}
+
+#register {
+	font-size: 18px;
+
+}
