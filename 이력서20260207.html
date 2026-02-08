@@ -6,6 +6,19 @@
 <script src="jquery-3.3.1.min.js"></script>
 
 <script>
+// input 클릭하면 배경색 변경, input 벗어나면 배경색 원래대로
+$(document).ready(function(){
+	// focus 시 백그라
+    $("input").focus(function(){
+        $(this).css("background-color", "#e6f2ff");
+    });
+
+	// 
+    $("input").blur(function(){
+        $(this).css("background-color", "");
+    });
+});
+
 // numberMaxLength : 숫자 자리 수 제한
 function numberMaxLength(e) {
 	if (e.value.length > e.maxLength) {
@@ -15,25 +28,23 @@ function numberMaxLength(e) {
 
 // fn_save : 등록하기
 function fn_save() {
-
+	// 성명 한글 체크
 	if ($("input[id='nameKor']").val() == "") {
 		alert("성명 한글을 입력하세요.");
 		$("input[id='nameKor ']").focus();
 	}
 }
 
-// input 클릭하면 배경색 변경, input 벗어나면 배경색 원래대로
-$(document).ready(function(){
-
-    $("input").focus(function(){
-        $(this).css("background-color","#e6f2ff");
-    });
-
-    $("input").blur(function(){
-        $(this).css("background-color","");
-    });
-
-});
+// asdfasd : afsdasd
+function fn_test(obj) {
+	//console.log($(obj));
+	//	alert($(obj));
+	if ($(obj).val() == "custom") {
+		 $("input[id='domainInput']").val("").focus();
+	} else {
+		$("input[id='domainInput']").val($(obj).val());
+	}
+}
 </script>
 
 </head>
@@ -122,20 +133,19 @@ $(document).ready(function(){
 
 		</td>
 		<th style="width:120px">E-mail</th>
-		<td><input type="text" id="E-mailId" name="E-mailId" value="" size="15">
-			@
-
-				<input type="text" id="domainInput" name="domainInput" size="15">
-				<select id="domainSelect" >
-	        <option value="">선택하세요</option>
-	        <option value="naver.com">naver.com</option>
-	        <option value="hanmail.net">hanmail.net</option>
-	        <option value="nate.com">nate.com</option>
-	        <option value="daum.net">daum.net</option>
-	        <option value="gmail.com">gmail.com</option>
-	        <option value="dreamwiz.com">dreamwiz.com</option>
-	        <option value="custom">직접입력</option>
-	    </select>
+		<td>
+			<input type="text" id="E-mailId" name="E-mailId" value="" size="15">@
+			<input type="text" id="domainInput" name="domainInput" size="15">
+			<select id="domainSelect" name="domainSelect" onChange="fn_test(this);">
+				<option value="">선택하세요</option>
+				<option value="naver.com">naver.com</option>
+				<option value="hanmail.net">hanmail.net</option>
+				<option value="nate.com">nate.com</option>
+				<option value="daum.net">daum.net</option>
+				<option value="gmail.com">gmail.com</option>
+				<option value="dreamwiz.com">dreamwiz.com</option>
+				<option value="custom">직접입력</option>
+			</select>
 		</td>
 
 	</tr>
