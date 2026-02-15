@@ -1,0 +1,567 @@
+<html lang="ko">
+<head>
+<title>이력서 양식</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css" />
+<script src="jquery-3.3.1.min.js"></script>
+
+<script>
+// input 클릭하면 배경색 변경, input 벗어나면 배경색 원래대로
+$(document).ready(function(){
+	// focus 시 백그라
+    $("input").focus(function(){
+        $(this).css("background-color", "#e6f2ff");
+    });
+
+	//
+    $("input").blur(function(){
+        $(this).css("background-color", "");
+    });
+});
+
+// numberMaxLength : 숫자 자리 수 제한
+function numberMaxLength(e) {
+	if (e.value.length > e.maxLength) {
+		e.value = e.value.slice(0, e.maxLength);
+	}
+}
+
+// fn_save : 등록하기
+function fn_save() {
+	// 한글 성명 입력 체크
+	if ($("input[id='nameKor']").val() == "") {
+		alert("한글 성명을 입력하세요.");
+		$("input[id='nameKor']").focus();
+    return;
+	}
+  // 영문 성명 입력 체크
+  if ($("input[id='nameEng']").val() == "") {
+		alert("영문 성명을 입력하세요.");
+		$("input[id='nameEng']").focus();
+    return;
+	}
+  //연령 입력 체크
+  if ($("input[id='age']").val() == "") {
+		alert("연령을 입력하세요.");
+		$("input[id='age']").focus();
+    return;
+	}
+  //주민등록번호 앞자리 입력 체크
+  if ($("input[id='frontIDnumber']").val() == "") {
+		alert("주민등록번호 앞자리를 입력하세요.");
+		$("input[id='frontIDnumber']").focus();
+    return;
+	}
+  //주민등록번호 뒷자리 입력 체크
+  if ($("input[id='backIDnumber']").val() == "") {
+		alert("주민등록번호 뒷자리를 입력하세요.");
+		$("input[id='backIDnumber']").focus();
+    return;
+	}
+  //생년월일 입력 체크
+  if ($("input[id='birthday']").val() == "") {
+		alert("생년월일을 입력하세요.");
+		$("input[id='birthday']").focus();
+    return;
+	}
+  //주민등록번호 본적 입력 체크
+  if ($("input[id='familyRegister']").val() == "") {
+		alert("본적을 입력하세요.");
+		$("input[id='familyRegister']").focus();
+    return;
+	}
+  //주민등록번호 본주소 입력 체크
+  if ($("input[id='address']").val() == "") {
+		alert("본주소를 입력하세요.");
+		$("input[id='address']").focus();
+    return;
+	}
+  //지역번호 입력 체크
+  if ($("select[id='callNoCustom']").val() == "") {
+		alert("지역번호를 입력하세요.");
+		$("select[id='callNoCustom']").focus();
+    return;
+	}
+  //전화번호 앞자리 입력 체크
+  if ($("input[id='frontCallNo']").val() == "") {
+		alert("전화번호 앞자리를 입력하세요.");
+		$("input[id='frontCallNo']").focus();
+    return;
+	}
+  //전화번호 뒷자리 입력 체크
+  if ($("input[id='backCallNo']").val() == "") {
+		alert("전화번호 뒷자리를 입력하세요.");
+		$("input[id='backCallNo']").focus();
+    return;
+	}
+  //E_mail 아이디 입력 체크
+  if ($("input[id='E-mailId']").val() == "") {
+		alert("E-mail 아이디를 입력하세요.");
+		$("input[id='E-mailId']").focus();
+    return;
+	}
+  //E-mail 도메인 입력 체크
+  if ($("input[id='domainInput']").val() == "") {
+		alert("E-mail 도메인을 입력하세요.");
+		$("input[id='domainInput']").focus();
+    return;
+	}
+  //휴대폰 앞자리 입력 체크
+  if ($("input[id='frontPhoneNo']").val() == "") {
+		alert("휴대폰 앞자리를 입력하세요.");
+		$("input[id='frontPhoneNo']").focus();
+    return;
+	}
+  //휴대폰 뒷자리 입력 체크
+  if ($("input[id='backPhoneNo']").val() == "") {
+		alert("휴대폰 뒷자리를 입력하세요.");
+		$("input[id='backPhoneNo']").focus();
+    return;
+	}
+  //홈페이지 주소 입력 체크
+  if ($("input[id='homepage']").val() == "") {
+		alert("홈페이지 주소를 입력하세요.");
+		$("input[id='homepage']").focus();
+    return;
+	}
+  //신장 입력 체크
+  if ($("input[id='height']").val() == "") {
+		alert("신장을 입력하세요.");
+		$("input[id='height']").focus();
+    return;
+	}
+  //체중 입력 체크
+  if ($("input[id='weight']").val() == "") {
+		alert("체중을 입력하세요.");
+		$("input[id='weight']").focus();
+    return;
+	}
+  //왼쪽 시력 입력 체크
+  if ($("input[id='leftVision']").val() == "") {
+		alert("왼쪽 시력을 입력하세요.");
+		$("input[id='leftVision']").focus();
+    return;
+	}
+  //오른쪽 시력 입력 체크
+  if ($("input[id='rightVision']").val() == "") {
+		alert("오른쪽 시력을 입력하세요.");
+		$("input[id='rightVision']").focus();
+    return;
+	}
+  //혈액형 입력 체크
+  if ($("select[id='bloodType']").val() == "") {
+		alert("혈액형을 입력하세요.");
+		$("select[id='bloodType']").focus();
+    return;
+	}
+  //가족관계 입력 체크
+  if ($("input[id='familyRelationship']").val() == "") {
+		alert("가족관계를 입력하세요.");
+		$("input[id='familyRelationship']").focus();
+    return;
+	}
+  //주거형태 입력 체크
+  if ($("input[id='housingType']").val() == "") {
+		alert("주거형태를 입력하세요.");
+		$("input[id='housingType']").focus();
+    return;
+	}
+  //미필 선택했을 시 면제사유 입력 체크
+  if ($("input[id='militaryServiceN']:checked").val() === "militaryN") {
+
+    if ($("input[id='exemption']").val() == "") {
+      alert("면제사유를 입력하세요.");
+      $("input[id='exemption']").focus();
+      return;
+    }
+  }
+  //병역구분 필 선택했을 시 군필 입력 체크
+  if ($("input[id='militaryServiceY']:checked").val() === "militaryY") {
+    if ($("input[id='military']").val() == "") {
+      alert("군필을 입력하세요.");
+      $("input[id='military']").focus();
+      return;
+    }
+  }
+  //병역구분 필 선택했을 시 계급 입력 체크
+  if ($("input[id='militaryServiceY']:checked").val() === "militaryY") {
+    if ($("input[id='rank']").val() == "") {
+      alert("계급을 입력하세요.");
+      $("input[id='rank']").focus();
+      return;
+     }
+   }
+  //병역구분 필 선택했을 시 복무시작년도 입력 체크
+  if ($("input[id='militaryServiceY']:checked").val() === "militaryY") {
+    if ($("input[id='militaryBeginYear']").val() == "") {
+      alert("복무시작년도를 입력하세요.");
+      $("input[id='militaryBeginYear']").focus();
+      return;
+    }
+  }
+  //병역구분 필 선택했을 시 복무시작월 입력 체크
+  if ($("input[id='militaryServiceY']:checked").val() === "militaryY") {
+    if ($("input[id='militaryBeginMonth']").val() == "") {
+      alert("복무시작월을 입력하세요.");
+      $("input[id='militaryBeginMonth']").focus();
+      return;
+    }
+  }
+  //병역구분 필 선택했을 시 전역년도 입력 체크
+  if ($("input[id='militaryServiceY']:checked").val() === "militaryY") {
+    if ($("input[id='militaryEndYear']").val() == "") {
+      alert("전역년도를 입력하세요.");
+      $("input[id='militaryEndYear']").focus();
+      return;
+    }
+  }
+  //병역구분 필 선택했을 시 전역월 입력 체크
+if ($("input[id='militaryServiceY']:checked").val() === "militaryY") {
+  if ($("input[id='militaryEndMonth']").val() == "") {
+    alert("전역월를 입력하세요.");
+    $("input[id='militaryEndMonth']").focus();
+    return;
+  }
+}
+  //종교 입력 체크
+  if ($("input[id='religion']").val() == "") {
+    alert("종교를 입력하세요.");
+    $("input[id='religion']").focus();
+    return;
+  }
+  //취미 입력 체크
+  if ($("input[id='hobby']").val() == "") {
+    alert("취미를 입력하세요.");
+    $("input[id='hobby']").focus();
+    return;
+  }
+  //특기 입력 체크
+  if ($("input[id='specialty']").val() == "") {
+    alert("특기를 입력하세요.");
+    $("input[id='specialty']").focus();
+    return;
+  }
+
+ //필수등록항목 입력 완료 시 등록완료
+ alert("등록완료");
+
+
+
+}
+
+// asdfasd : afsdasd
+function fn_test(obj) {
+	//console.log($(obj));
+	//	alert($(obj));
+	if ($(obj).val() == "custom") {
+		 $("input[id='domainInput']").val("").focus();
+	} else {
+		$("input[id='domainInput']").val($(obj).val());
+	}
+}
+</script>
+
+</head>
+
+<body>
+	<h1>이 력 서</h1>
+	<h2>1.기초 자료</h2>
+
+	<form id="firstForm" name="firstForm">
+	<table>
+	<tr>
+			<td rowspan="3" style="width:150px"><img src="Seok.jpg" width=200px /></td>
+			<th rowspan="2" style="width:100px">성 명</th>
+			<th style width="100px">한 글</th>
+			<td style="width:350px">
+				<input type="text" size="10" id="nameKor" name="nameKor" value="" placeholder="홍길동" />
+			</td>
+			<th style="width:100px">성 별</th>
+			<td>
+				<input type="radio" id="genderMale" name="gender" value="male" checked />남
+  				<input type="radio" id="genderFemale" name="gender" value="female" />여
+			</td>
+	</tr>
+	<tr>
+		<th>영 문</th>
+		<td><input type="text" size="15" id="nameEng" name="nameEng"
+				   value="" placeholder="HONG GILDONG" />
+		</td>
+		<th>연 령</th>
+		<td>만<input type="number" id="age" name="age" value="" maxlength="3" oninput="numberMaxLength(this);" style="width:40px" />
+			세
+		</td>
+	</tr>
+	<tr>
+		<th colspan="2">주민등록번호</th>
+		<td>
+			<input type="number" id="frontIDnumber" name="frontIDnumber" maxlength="6" style="width:100px" oninput="numberMaxLength(this);" />-
+			<input type="password" id="backIDnumber" name="backIDnumber" maxlength="7" style="width:100px" oninput="numberMaxLength(this);" />
+		</td>
+		<th>생년월일</th>
+		<td>
+			<input type="radio" id="birth" name="birth" value="solar calendar" checked/>양력
+			<input type="radio" id="birth" name="birth" value="lunar calendar" />음력
+			<input type="text" id="birthday" name="birthday" />입력 예시)19000101
+		</td>
+	</tr>
+	<tr>
+		<th>본 적</th>
+		<td colspan="7"><input type="text" id="familyRegister" name="familyRegister" value="" size="50" /></td>
+	</tr>
+	<tr>
+		<th>본 주 소</th>
+		<td colspan="7"><input type="text" id="address" name="address" value="" size="50" /></td>
+	</tr>
+	</table>
+
+	<table class="table2">
+	<tr>
+		<th rowspan="2" style="width:150px;">연 락 처</th>
+		<th style="width:80px">전화번호</th>
+		<td>
+			<select id="callNoCustom">
+				<option value="" selected>지역번호 선택</option>
+				<option value="02">02</option>
+				<option value="031">031</option>
+				<option value="032">032</option>
+				<option value="041">041</option>
+				<option value="042">042</option>
+				<option value="043">043</option>
+				<option value="044">044</option>
+				<option value="051">051</option>
+				<option value="052">052</option>
+				<option value="053">053</option>
+				<option value="054">054</option>
+				<option value="055">055</option>
+				<option value="061">061</option>
+				<option value="062">062</option>
+				<option value="063">063</option>
+				<option value="064">064</option>
+				<option value="070">070</option>
+	    </select>-
+
+
+		  <input type="number" id="frontCallNo" name="frontCallNo" value="" style="width:80px">-
+			<input type="number" id="backCallNo" name="backCallNo" value="" style="width:80px">
+
+		</td>
+		<th style="width:120px">E-mail</th>
+		<td>
+			<input type="text" id="E-mailId" name="E-mailId" value="" size="15">@
+			<input type="text" id="domainInput" name="domainInput" size="15">
+			<select id="domainSelect" name="domainSelect" onChange="fn_test(this);">
+				<option value="">==선택==</option>
+				<option value="naver.com">naver.com</option>
+				<option value="hanmail.net">hanmail.net</option>
+				<option value="nate.com">nate.com</option>
+				<option value="daum.net">daum.net</option>
+				<option value="gmail.com">gmail.com</option>
+				<option value="dreamwiz.com">dreamwiz.com</option>
+				<option value="custom">직접입력</option>
+			</select>
+		</td>
+
+	</tr>
+	<tr>
+		<th>휴 대 폰</th>
+		<td>
+			<select>
+				<option value="010" selected>010</option>
+				<option value="011">011</option>
+				<option value="016">016</option>
+				<option value="017">017</option>
+				<option value="018">018</option>
+				<option value="019">019</option>
+			</select>-
+			<input type="number" id="frontPhoneNo" name="frontPhoneNo" value=""
+             maxlength="4" style="width:80px" oninput="numberMaxLength(this);"/>-
+			<input type="number" id="backPhoneNo" name="backPhoneNo" value=""
+			       maxlength="4" style="width:80px" oninput="numberMaxLength(this);"/>
+		</td>
+		<th>Homepage</th>
+		<td><input type="text" id="homepage" name="homepage" size="30"></td>
+	</tr>
+	</table>
+	</form>
+
+	<h2>2.신상 자료</h2>
+
+	<table class="table3">
+	<tr>
+		<th style="width:100px;">신체사항</th>
+		<th style="width:60px;">신 장</th>
+		<td style="width:100px;"><input type="number" id="height" name="height" value="" style="width:60px"/>cm</td>
+		<th style="width:60px;">체 중</th>
+		<td style="width:100px;"><input type="number" id="weight" name="weight" value="" style="width:60px"/>kg</td>
+		<th style="width:60px;">시 력</th>
+		<td style="width:100px;">
+			좌:<input type="number" id="leftVision" name="leftVision" value="" style="width:50px"/><br>
+			우:<input type="number" id="rightVision" name="rightVision" value="" style="width:50px"/>
+		</td>
+		<th style="width:60px;">혈액형</th>
+		<td style="width:100px;">
+			<select id="bloodType" name="bloodType">
+				<option value="" selected>==선택==</option>
+				<option value="A">A형</option>
+				<option value="B">B형</option>
+				<option value="AB">AB형</option>
+				<option value="O">O형</option>
+			</select>
+		</td>
+		<th style="width:60px;">결 혼</th>
+		<td style="width:100px;">
+				<input type="radio" id="marriage" name="marriage" value="unmarried" checked/>미혼<br>
+				<input type="radio" id="marriage" name="marriage" value="married" />기혼
+		</td>
+	</tr>
+	<tr>
+		<th style="width:60px;">가족관계</th>
+		<td colspan="4"><input type="text" id="familyRelationship" name="familyRelationship" value="" size="40" /></td>
+		<th style="width:60px;">주거형태</th>
+		<td colspan="5"><input type="text" id="housingType" name="housingType" value="" size="8" /></td>
+	</tr>
+	<tr>
+		<th style="width:60px;">병역구분</th>
+		<td colspan="4">
+			<input type="radio" id="militaryServiceY" name="militaryService" value="militaryY" checked/>필<br>
+		  <input type="radio" id="militaryServiceN" name="militaryService" value="militaryN" />미필
+		</td>
+		<th style="width:60px;">면제사유</th>
+		<td colspan="5"><input type="text" id="exemption" name="exemption" value="" size="25"></td>
+	</tr>
+	<tr>
+		<th style="width:60px;">군 필</th>
+		<td colspan="4"><input type="text" id="military" name="military" value="" size="8"></td>
+		<th style="width:60px;">계 급</th>
+		<td colspan="2"><input type="text" id="rank" name="rank" value="" size="8"></td>
+		<th style="width:60px;">복무기간</th>
+		<td colspan="2">
+      <input type="number" id="militaryBeginYear" name="militaryBeginYear " style="width:80px" />년
+      <input type="number" id="militaryBeginMonth" name="militaryBeginMonth" style="width:40px" />월-<br>
+		  <input type="number" id="militaryEndYear" name="militaryEndYear" style="width:80px" />년
+      <input type="number" id="militaryEndMonth" name="militaryEndMonth"style="width:40px" />월
+	  </td>
+	</tr>
+	<tr>
+		<th style="width:60px;">종 교</th>
+		<td colspan="4"><input type="text" id="religion" name="religion" value="" size="8"></td>
+		<th style="width:60px;">취 미</th>
+		<td colspan="2"><input type="text" id="hobby" name="hobby" value="" size="20"></td>
+		<th style="width:60px;">특 기</th>
+		<td colspan="2"><input type="text" id="specialty" name="specialty" value="" size="15"></td>
+	</tr>
+	</table>
+
+	<h2>3.가족 사항</h2>
+
+	<table class="table4">
+	<tr>
+	<th>관 계 </th>
+	<th>성 명</th>
+	<th>연 령</th>
+	<th>최종 학력</th>
+	<th>근 무 처</th>
+	<th>직위</th>
+	<th>동거 여부</th>
+	</tr>
+	<tr>
+		<td><input type="text" size="10" id="familyArelations" name="familyArelations" value=""></td>
+		<td><input type="text" size="10" id="familyA" name="familyA" value=""></td>
+		<td>만 <input type="number" id="familyAage" name="familyAage" value="" style="width:40px" />세</td>
+		<td><input type="text" id="familyAacademic" name="familyAacademic" value="" size="10"></td>
+		<td><input type="text" id="familyAJob" name="familyAJob" value=""></td>
+		<td><input type="text" id="familyAjobPosition" name="familyAjobPosition" value="" size="10"></td>
+		<td><input type="radio" id="livingWithFamilyA" name="livingWithFamilyA" value="livingTogetherFamilyA" />O
+	      <input type="radio" id="livingWithFamilyA "name="livingWithFamilyA" value="notLivingTogetherFamilyA" />X
+	 </td>
+	</tr>
+	<tr>
+		<td><input type="text" size="10" id="familyBrelations" name="familyBrelations" value=""></td>
+		<td><input type="text" size="10" id="familyB" name="familyB" value=""></td>
+		<td>만 <input type="number" id="familyBage" name="familyBage" value="" style="width:40px" />세</td>
+		<td><input type="text" id="familyBacademic" name="familyBacademic" value="" size="10"></td>
+		<td><input type="text" id="familyBJob" name="familyBJob" value=""></td>
+		<td><input type="text" id="familyBjobPosition" name="familyBjobPosition" value="" size="10"></td>
+		<td><input type="radio" id="livingWithFamilyB" name="livingWithFamilyB" value="livingTogetherFamilyB" />O
+	      <input type="radio" id="livingWithFamilyB"name="livingWithFamilyB" value="notLivingTogetherFamilyB" />X
+	</tr>
+	<tr>
+		<td><input type="text" size="10" id="familyCrelations" name="familyCrelations" value=""></td>
+		<td><input type="text" size="10" id="familyC" name="familyC" value=""></td>
+		<td>만 <input type="number" id="familyCage" name="familyCage" value="" style="width:40px" />세</td>
+		<td><input type="text" id="familyCacademic" name="familyCacademic" value="" size="10"></td>
+		<td><input type="text" id="familyCJob" name="familyCJob" value=""></td>
+		<td><input type="text" id="familyCjobPosition" name="familyCjobPosition" value="" size="10"></td>
+		<td><input type="radio" id="livingWithFamilyC" name="livingWithFamilyC" value="livingTogetherFamilyC" />O
+	      <input type="radio" id="livingWithFamilyC"name="livingWithFamilyC" value="notLivingTogetherFamilyC" />X
+	</tr>
+	<tr>
+		<td><input type="text" size="10" id="familyDrelations" name="familyDrelations" value=""></td>
+		<td><input type="text" size="10" id="familyD" name="familyD" value=""></td>
+		<td>만 <input type="number" id="familyDage" name="familyDage" value="" style="width:40px" />세</td>
+		<td><input type="text" id="familyDacademic" name="familyDacademic" value="" size="10"></td>
+		<td><input type="text" id="familyDJob" name="familyDJob" value=""></td>
+		<td><input type="text" id="familyDjobPosition" name="familyDjobPosition" value="" size="10"></td>
+		<td><input type="radio" id="livingWithFamilyD" name="livingWithFamilyD" value="livingTogetherFamilyD" />O
+	      <input type="radio" id="livingWithFamilyD"name="livingWithFamilyD" value="notLivingTogetherFamilyD" />X
+	</tr>
+	<tr>
+		<td><input type="text" size="10" id="familyErelations" name="familyErelations" value=""></td>
+		<td><input type="text" size="10" id="familyE" name="familyE" value=""></td>
+		<td>만 <input type="number" id="familyEage" name="familyEage" value="" style="width:40px" />세</td>
+		<td><input type="text" id="familyEacademic" name="familyEacademic" value="" size="10"></td>
+		<td><input type="text" id="familyEJob" name="familyEJob" value=""></td>
+		<td><input type="text" id="familyEjobPosition" name="familyEjobPosition" value="" size="10"></td>
+		<td><input type="radio" id="livingWithFamilyE" name="livingWithFamilyE" value="livingTogetherFamilyE" />O
+	      <input type="radio" id="livingWithFamilyE"name="livingWithFamilyE" value="notLivingTogetherFamilyE" />X
+	</tr>
+	</table>
+
+	<h2>4.학력 사항</h2>
+
+	<table class="table5">
+		<tr>
+			<th>기간</th>
+			<th>출신 학교</th>
+			<th>전 공</th>
+			<th>소재지</th>
+			<th>기 타</th>
+		</tr>
+		<tr>
+			<td>
+				<input type="number" id="year of schoolA begin" name="year of schoolA begin" value="" style="width:80px" />년
+				<input type="number" id="month of schoolA begin" name="month of schoolA begin" value="" style="width:40px" />월-<br>
+			  <input type="number" id="year of schoolA end" name="year of schoolA end" value="" style="width:80px" />년
+				<input type="number" id="month of schoolA end" name="month of schoolA end" value="" style="width:40px" />월
+		  </td>
+			<td><input type="text" id="schoolA" name="schoolA" value="" size="15" /></td>
+			<td><input type="text" id="schoolA major" name="schoolA major" value="" size="15" /></td>
+			<td><input type="text" id="schoolA address" name="schoolA address" value="" size="15" /></td>
+			<td><input type="text" id="schoolA etc" name="schoolA etc" value="" size="15" /></td>
+		</tr>
+		<tr>
+			<td>
+				<input type="number" id="year of schoolB begin" name="year of schoolB begin" value="" style="width:80px" />년
+				<input type="number" id="month of schoolB begin" name="month of schoolB begin" value="" style="width:40px" />월-<br>
+			  <input type="number" id="year of schoolB end" name="year of schoolB end" value="" style="width:80px" />년
+				<input type="number" id="month of schoolB end" name="month of schoolB end" value="" style="width:40px" />월
+		  </td>
+			<td><input type="text" id="schoolB" name="schoolB" value="" size="15" /></td>
+			<td><input type="text" id="schoolB major" name="schoolB major" value="" size="15" /></td>
+			<td><input type="text" id="schoolB address" name="schoolB address" value="" size="15" /></td>
+			<td><input type="text" id="schoolB etc" name="schoolB etc" value="" size="15" /></td>
+	 </tr>
+	</table>
+	<br />
+	<br />
+
+	<div>
+		<input type="button" id="register" value="등록하기" href="#none" onClick="fn_save();"style="margin-left:470px; margin-top:0px;">
+	</div>
+	<br />
+	<br />
+
+</body>
+
+</html>
