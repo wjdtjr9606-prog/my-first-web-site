@@ -1,8 +1,10 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset = "UTF-8">
-<title>CARD GAME</title>
+	<meta charset = "UTF-8">
+	<title>CARD GAME</title>
+<script src="jquery-3.3.1.min.js"></script>
+
 <style>
 table {
 	border-collapse: collapse;
@@ -11,23 +13,54 @@ table {
 }
 
 td {
-	width: 80px;
-	height: 80px;
+	width: 120px;
+	height: 120px;
 	background-color: orange;
-	border: 5px solid white;
+	border: 10px solid white;
 }
+
+.cardBack {
+	width: 120px;
+	height: 120px;
+	text-align:center;
+	color:white;
+	font-size: 80px;
+	background-color: red;
+	border: 5px red;
+}
+
+
 </style>
 </head>
-<script src="/js/jquery-3.3.1.min.js"></script>
-
 <script>
-$(function(){
+$(function () {
 
-	let randomNumber = Math.floor(Math.random() * 20) + 1;
-    
-    $(".card"]).val(randomNumber);
+
 
 });
+
+const fn_start = function(){
+	let numArray = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10];
+	//let chosenNum = [];
+
+	for (let i = numArray.length -1; i > 0; i--){
+		let j = Math.floor(Math.random() * (i + 1));
+		let k = numArray[i];
+		numArray[i] = numArray[j];
+		numArray[j] = k;
+	}
+	console.log(numArray);
+	console.log(numArray[0]);
+
+	//const randomNumber = Math.floor(Math.random() * numArray.length);
+	//console.log(randomNumber);
+
+	for(let i = 0; i < 20; i++ ){
+		$('.cardBack').eq(i).text(numArray[i]);
+	}
+
+}
+
 
 
 </script>
@@ -48,37 +81,97 @@ $(function(){
 		<option selected >4</option>
 		<option>5</option>
 	</select>
-	
-	<table class = "table" border = "1">
+	<button type="button" onclick="fn_start()";>시작</button>
+	<button type="button">리셋</button>
+	<span id = stopWatch>etetee</span>
+	<table class = "table" >
 		<tr>
-			<td><input type="hidden" class="card" value=""></td>
-			<td><input type="hidden" class="card" value=""></td>
-			<td><input type="hidden" class="card" value=""></td>
-			<td><input type="hidden" class="card" value=""></td>
-			<td><input type="hidden" class="card" value=""></td>
+			<td>
+				<div class="cardCover"></div>
+				<div class="cardBack"></div>
+			</td>
+			<td>
+				<div class="cardCover"></div>
+				<div class="cardBack"></div>
+			</td>
+			<td>
+				<div class="cardCover"></div>
+				<div class="cardBack"></div>
+			</td>
+			<td>
+				<div class="cardCover"></div>
+				<div class="cardBack"></div>
+			</td>
+			<td>
+				<div class="cardCover"></div>
+				<div class="cardBack"></div>
+			</td>
 		</tr>
 		<tr>
-			<td><input type="hidden" class="card" value=""></td>
-			<td><input type="hidden" class="card" value=""></td>
-			<td><input type="hidden" class="card" value=""></td>
-			<td><input type="hidden" class="card" value=""></td>
-			<td><input type="hidden" class="card" value=""></td>
-
+			<td>
+				<div class="cardCover"></div>
+				<div class="cardBack"></div>
+			</td>
+			<td>
+				<div class="cardCover"></div>
+				<div class="cardBack"></div>
+			</td>
+			<td>
+				<div class="cardCover"></div>
+				<div class="cardBack"></div>
+			</td>
+			<td>
+				<div class="cardCover"></div>
+				<div class="cardBack"></div>
+			</td>
+			<td>
+				<div class="cardCover"></div>
+				<div class="cardBack"></div>
+			</td>
 		</tr>		
 		<tr>
-			<td><input type="hidden" class="card" value=""></td>
-			<td><input type="hidden" class="card" value=""></td>
-			<td><input type="hidden" class="card" value=""></td>
-			<td><input type="hidden" class="card" value=""></td>
-			<td><input type="hidden" class="card" value=""></td>
-
+			<td>
+				<div class="cardCover"></div>
+				<div class="cardBack"></div>
+			</td>
+			<td>
+				<div class="cardCover"></div>
+				<div class="cardBack"></div>
+			</td>
+			<td>
+				<div class="cardCover"></div>
+				<div class="cardBack"></div>
+			</td>
+			<td>
+				<div class="cardCover"></div>
+				<div class="cardBack"></div>
+			</td>
+			<td>
+				<div class="cardCover"></div>
+				<div class="cardBack"></div>
+			</td>
 		</tr>
 		<tr>
-			<td><input type="hidden" class="card" value=""></td>
-			<td><input type="hidden" class="card" value=""></td>
-			<td><input type="hidden" class="card" value=""></td>
-			<td><input type="hidden" class="card" value=""></td>
-			<td><input type="hidden" class="card" value=""></td>
+			<td>
+				<div class="cardCover"></div>
+				<div class="cardBack"></div>
+			</td>
+			<td>
+				<div class="cardCover"></div>
+				<div class="cardBack"></div>
+			</td>
+			<td>
+				<div class="cardCover"></div>
+				<div class="cardBack"></div>
+			</td>
+			<td>
+				<div class="cardCover"></div>
+				<div class="cardBack"></div>
+			</td>
+			<td>
+				<div class="cardCover"></div>
+				<div class="cardBack"></div>
+			</td>
 		</tr>		
 	</table>
 </body>
