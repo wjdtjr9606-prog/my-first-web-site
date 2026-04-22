@@ -26,46 +26,29 @@ td {
 	color:white;
 	font-size: 80px;
 	background-color: red;
-	border: 5px red;
+	border: 5px red;	
 }
 
+.cardCover {
+    width: 120px;
+    height: 120px;
+    background-color: blue;
+    position: absolute;
+    cursor: pointer;
+	transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+td {
+    position: relative;
+}
+
+.cardCover.flipped {
+    transform: rotateY(180deg);
+}
 
 </style>
 </head>
-<script>
-$(function () {
-
-
-
-});
-
-const fn_start = function(){
-	let numArray = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10];
-	//let chosenNum = [];
-
-	for (let i = numArray.length -1; i > 0; i--){
-		let j = Math.floor(Math.random() * (i + 1));
-		let k = numArray[i];
-		numArray[i] = numArray[j];
-		numArray[j] = k;
-	}
-	console.log(numArray);
-	console.log(numArray[0]);
-
-	//const randomNumber = Math.floor(Math.random() * numArray.length);
-	//console.log(randomNumber);
-
-	for(let i = 0; i < 20; i++ ){
-		$('.cardBack').eq(i).text(numArray[i]);
-	}
-
-}
-
-
-
-</script>
-
-
 <body>
 	<select id="row">
 		<option>1</option>
@@ -81,10 +64,172 @@ const fn_start = function(){
 		<option selected >4</option>
 		<option>5</option>
 	</select>
-	<button type="button" onclick="fn_start()";>시작</button>
-	<button type="button">리셋</button>
-	<span id = stopWatch>etetee</span>
-	<table class = "table" >
+	<div id="stopwatch">00:00:00</div>
+    <button id="startButton" onclick="fn_start()">시작</button>
+    <button id="resetButton" onclick="fn_reset()">리셋</button>
+
+<script>
+
+$(function(){
+	$('.card').click(function() {
+        $(this).toggleClass('flipped');
+    });
+	//로컬 스토리지 키값 (성공횟수) 삭제 (초기화)
+	
+	window.localStorage.removeItem('success');
+
+	
+});
+
+
+
+let startTime;
+let elapsedTime = 0;
+let timerInterval;
+let gameStarted = false;
+let firstCard = null;
+let secondCard = null;
+let lock = false;
+
+const timeToString = function(time) {
+	let diffInHrs = time / 3600000;
+	let hh = Math.floor(diffInHrs);
+
+	let diffInMin = (diffInHrs - hh) * 60;
+	let mm = Math.floor(diffInMin);
+
+	let diffInSec = (diffInMin - mm) * 60;
+	let ss = Math.floor(diffInSec);
+
+	// 시간 형식 맞추기 (00:00:00)
+	let formattedHH = hh.toString().padStart(2, "0");
+	let formattedMM = mm.toString().padStart(2, "0");
+	let formattedSS = ss.toString().padStart(2, "0");
+
+	return `${formattedHH}:${formattedMM}:${formattedSS}`;
+}
+
+const print = function(text) {
+	document.getElementById("stopwatch").innerHTML = text;
+}
+
+const fn_start = function() {
+	
+	gameStarted = true;
+	
+	startTime = Date.now() - elapsedTime;
+	timerInterval = setInterval(function printTime() {
+		elapsedTime = Date.now() - startTime;
+		print(timeToString(elapsedTime));
+	}, 10);
+	
+	let numArray = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10];
+	//let chosenNum = [];
+
+	for (let i = numArray.length -1; i > 0; i--){
+		let j = Math.floor(Math.random() * (i + 1));
+		let k = numArray[i];
+		numArray[i] = numArray[j];
+		numArray[j] = k;
+	}
+	//console.log(numArray);
+	//console.log(numArray[0]);
+	//const randomNumber = Math.floor(Math.random() * numArray.length);
+	//console.log(randomNumber);
+	for(let i = 0; i < 20; i++ ){
+	$('.cardBack').eq(i).text(numArray[i]);
+}
+
+	gamestarted = false;
+	lock = true;
+	
+	// 뒷면 보여주고
+	$('.cardCover').hide();
+	// 2초 후 다시 닫기
+	setTimeout(() => {
+    $('.cardCover').show();
+
+    lock = false;
+    gameStarted = true;  // 이제 클릭 가능
+	}, 3000);
+	//$(this).prop('disabled', true);
+}
+
+const fn_reset = function() {
+	gameStarted = false;
+	//스톱워치 시간 초기화
+	clearInterval(timerInterval);
+	//시간 아래처럼 표기
+	print("00:00:00");
+	elapsedTime = 0;
+	
+	//페이지 새로고침
+	window.location.reload();
+	
+	//로컬 스토리지 키값 (성공횟수) 삭제 (초기화)
+	window.localStorage.removeItem('success');
+
+}
+
+
+
+
+$(document).on('click', '.cardCover', function () {
+	if (!gameStarted) return; // 🔥 시작 안 했으면 클릭 무시
+    //if (lock) return;
+	if (lock) return;
+
+	$(this).hide();
+
+	let value = $(this).siblings('.cardBack').text();
+
+	if (!firstCard) {
+		firstCard = $(this);
+	} else {
+		secondCard = $(this);
+		lock = true;
+
+		let firstValue = firstCard.siblings('.cardBack').text();
+
+		if (firstValue === value) {
+		
+			// 성공 횟수 저장
+			let success = parseInt(localStorage.getItem("success")) || 0;
+			success++;
+			localStorage.setItem("success", success);
+			
+			if (success === 10) {
+			
+				setTimeout(() => {
+				alert("성공! 기록은 " + timerInterval + "입니다." );
+				}, 100);
+				
+				clearInterval(timerInterval); 
+				//setTimeout(() => {
+				//alert("성공!");
+				//}, 100);
+			}
+			
+			firstCard = null;
+			secondCard = null;
+			lock = false;
+		} else {
+			
+			// 실패
+			setTimeout(() => {
+				firstCard.show();
+				secondCard.show();
+				
+				firstCard = null;
+				secondCard = null;
+				lock = false;
+			}, 800);
+		}
+	}
+});		
+</script>
+
+	<table class = "card" >
 		<tr>
 			<td>
 				<div class="cardCover"></div>
