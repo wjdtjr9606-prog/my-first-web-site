@@ -15,7 +15,6 @@ table {
 td {
 	width: 120px;
 	height: 120px;
-	background-color: orange;
 	border: 10px solid white;
 }
 
@@ -35,51 +34,31 @@ td {
     background-color: blue;
     position: absolute;
     cursor: pointer;
-	transform-style: preserve-3d;
-    transition: transform 0.6s;
+	
 }
 
 td {
     position: relative;
 }
 
-.cardCover.flipped {
-    transform: rotateY(180deg);
-}
-
 </style>
 </head>
 <body>
-	<select id="row">
-		<option>1</option>
-		<option>2</option>
-		<option>3</option>
-		<option>4</option>
-		<option selected>5</option>
-	</select>x
-	<select id="column">
-		<option>1</option>
-		<option>2</option>
-		<option>3</option>
-		<option selected >4</option>
-		<option>5</option>
-	</select>
-	<div id="stopwatch">00:00:00</div>
-    <button id="startButton" onclick="fn_start()">시작</button>
-    <button id="resetButton" onclick="fn_reset()">리셋</button>
-
+	
 <script>
 
 $(function(){
-	$('.card').click(function() {
-        $(this).toggleClass('flipped');
-    });
-	//로컬 스토리지 키값 (성공횟수) 삭제 (초기화)
-	
-	window.localStorage.removeItem('success');
 
+	//시작 버튼 클릭 시 버튼 비활성화
+	$('#startButton').on("click", function () {
+        $(this).attr("disabled", true);
+    });
 	
+	//로컬 스토리지 키값 (성공횟수) 삭제 (초기화)
+	window.localStorage.removeItem('success');
 });
+
+
 
 
 
@@ -117,7 +96,11 @@ const fn_start = function() {
 	
 	gameStarted = true;
 	
+	
+
+	
 	startTime = Date.now() - elapsedTime;
+	
 	timerInterval = setInterval(function printTime() {
 		elapsedTime = Date.now() - startTime;
 		print(timeToString(elapsedTime));
@@ -140,7 +123,7 @@ const fn_start = function() {
 	$('.cardBack').eq(i).text(numArray[i]);
 }
 
-	gamestarted = false;
+	
 	lock = true;
 	
 	// 뒷면 보여주고
@@ -175,7 +158,7 @@ const fn_reset = function() {
 
 
 $(document).on('click', '.cardCover', function () {
-	if (!gameStarted) return; // 🔥 시작 안 했으면 클릭 무시
+	if (!gameStarted) return; //  시작 안 했으면 클릭 무시
     //if (lock) return;
 	if (lock) return;
 
@@ -201,7 +184,7 @@ $(document).on('click', '.cardCover', function () {
 			if (success === 10) {
 			
 				setTimeout(() => {
-				alert("성공! 기록은 " + timerInterval + "입니다." );
+				alert("성공! 기록은 " + elapsedTime.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + "초입니다." );
 				}, 100);
 				
 				clearInterval(timerInterval); 
@@ -228,12 +211,21 @@ $(document).on('click', '.cardCover', function () {
 	}
 });		
 </script>
-
-	<table class = "card" >
+		
+	
+	
+	
+	
+	<div id="stopwatch">00:00:00</div>
+    <button  id="startButton" onclick="fn_start()">시작</button>
+    <button id="resetButton" onclick="fn_reset()">리셋</button>
+	<table>
 		<tr>
-			<td>
-				<div class="cardCover"></div>
-				<div class="cardBack"></div>
+			<td id="card">
+				<div class="cardInner">
+					<div class="cardCover"></div>
+					<div class="cardBack"></div>
+				</div>	
 			</td>
 			<td>
 				<div class="cardCover"></div>
