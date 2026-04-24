@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset = "UTF-8">
+	<title>CARD GAME</title>
+<script src="jquery-3.3.1.min.js"></script>
+
+<style>
+table {
+	border-collapse: collapse;
+}
+
+td {
+	width: 120px;
+	height: 120px;
+	border: 10px solid white;
+	perspective: 600px;
+}
+
+
+.cardCover {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    cursor: pointer;
+}
+
+/* 뒤집힌 상태 */
+.cardCover.flipped {
+    transform: rotateY(180deg);
+}
+
+/* 앞/뒤 공통 */
+.cardFace {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* 뒤집힐 때 안 보이게 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    color: white;
+}
+
+/* 카드 뒷면 */
+.front {
+    background: blue;
+}
+
+/* 카드 앞면 */
+.back {
+    background: red;
+    transform: rotateY(180deg);
+}
+</style>
+</head>
+<body>
+	
+<script>
+
+$(function(){
+
+	//로컬 스토리지 키값 (성공횟수) 삭제 (초기화)
+	window.localStorage.removeItem('success');
+});
+
+
+
+
+
+let startTime;
+let elapsedTime = 0;
+let timerInterval;
+let gameStarted = false;
+let firstCard = null;
+let secondCard = null;
+let lock = false;
+
+
+const timeToString = function(time) {
+	let diffInHrs = time / 3600000;
+	let hh = Math.floor(diffInHrs);
+
+	let diffInMin = (diffInHrs - hh) * 60;
+	let mm = Math.floor(diffInMin);
+
+	let diffInSec = (diffInMin - mm) * 60;
+	let ss = Math.floor(diffInSec);
+
+	// 시간 형식 맞추기 (00:00:00)
+	let formattedHH = hh.toString().padStart(2, "0");
+	let formattedMM = mm.toString().padStart(2, "0");
+	let formattedSS = ss.toString().padStart(2, "0");
+
+	return `${formattedHH}:${formattedMM}:${formattedSS}`;
+}
+
+const print = function(text) {
+	$("#stopwatch").text(text);
+}
+
+$(document).on("click", "#startButton", function(){
+    $(this).attr("disabled", true);
+	
+	
+
+	startTime = Date.now() 
+	
+	timerInterval = setInterval(()=>{
+		elapsedTime = Date.now() - startTime;
+		print(timeToString(elapsedTime));
+	}, 10);
+	
+	let numArray = [1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10];
+	
+
+	for (let i = numArray.length -1; i > 0; i--){
+		let j = Math.floor(Math.random() * (i + 1));
+		[numArray[i], numArray[j]] = [numArray[j], numArray[i]];
+    }
+	
+	// 값 넣기 (back에 숫자)
+    $(".cardCover").each(function(i){
+        $(this).attr("data-value", numArray[i]);
+        $(this).find(".back").text(numArray[i]);
+    });
+
+	lock = true;
+	
+	// 뒷면 보여주고
+	$(".cardCover").addClass("flipped");
+
+	// 3초 후 다시 닫기
+	setTimeout(() => {
+		$('.cardCover').removeClass("flipped");
+		lock = false;
+		gameStarted = true;  // 이제 클릭 가능
+	}, 3000);
+	
+});
+
+$(document).on("click", "#resetButton", function(){
+    location.reload();
+});
+
+
+
+$(document).on('click', '.cardCover', function () {
+
+	if (!gameStarted || lock) return;
+
+	if ($(this).hasClass("flipped")) return;
+
+	$(this).addClass("flipped");
+
+	if (!firstCard) {
+		firstCard = $(this);
+	} else {
+		secondCard = $(this);
+		lock = true;
+
+		let firstValue = firstCard.data("value");
+        let secondValue = secondCard.data("value");
+
+		if (firstValue === secondValue) {
+		
+			// 성공 횟수 저장
+			let success = parseInt(localStorage.getItem("success")) || 0;
+			success++;
+			localStorage.setItem("success", success);
+			
+			if (success === 10) {
+			
+				setTimeout(() => {
+				alert("성공!" );
+				}, 100);
+				
+				clearInterval(timerInterval); 
+				
+			}
+			
+			firstCard = null;
+			secondCard = null;
+			lock = false;
+		} else {
+			
+			// 실패
+			setTimeout(() => {
+				firstCard.removeClass("flipped");
+                secondCard.removeClass("flipped");
+				
+				firstCard = null;
+				secondCard = null;
+				lock = false;
+			}, 800);
+		}
+	}
+});		
+</script>
+		
+	
+	
+	
+	
+	<div id="stopwatch">00:00:00</div>
+    <button  id="startButton" >시작</button>
+    <button id="resetButton" >리셋</button>
+	<table>
+		<tr>
+			<td>
+				<div class="cardCover">
+					<div class="cardFace front"></div>
+					<div class="cardFace back"></div>	
+				</div>		
+			</td>
+			<td>
+                <div class="cardCover">
+					<div class="cardFace front"></div>
+					<div class="cardFace back"></div>	
+				</div>			
+			</td>
+			<td>
+                <div class="cardCover">
+					<div class="cardFace front"></div>
+					<div class="cardFace back"></div>	
+				</div>			
+			</td>
+			<td>
+                <div class="cardCover">
+					<div class="cardFace front"></div>
+					<div class="cardFace back"></div>	
+				</div>			
+			</td>
+			<td>
+                <div class="cardCover">
+					<div class="cardFace front"></div>
+					<div class="cardFace back"></div>	
+				</div>				
+			</td>
+		</tr>
+		<tr>
+			<td>
+                <div class="cardCover">
+					<div class="cardFace front"></div>
+					<div class="cardFace back"></div>	
+				</div>	
+			</td>
+			<td>
+				<div class="cardCover">
+					<div class="cardFace front"></div>
+					<div class="cardFace back"></div>	
+				</div>	
+			</td>
+			<td>
+				<div class="cardCover">
+					<div class="cardFace front"></div>
+					<div class="cardFace back"></div>	
+				</div>	
+			</td>
+			<td>
+				<div class="cardCover">
+					<div class="cardFace front"></div>
+					<div class="cardFace back"></div>	
+				</div>	
+			</td>
+			<td>
+				<div class="cardCover">
+					<div class="cardFace front"></div>
+					<div class="cardFace back"></div>	
+				</div>	
+			</td>
+		</tr>		
+		<tr>
+			<td>
+				<div class="cardCover">
+					<div class="cardFace front"></div>
+					<div class="cardFace back"></div>	
+				</div>	
+			</td>
+			<td>
+				<div class="cardCover">
+					<div class="cardFace front"></div>
+					<div class="cardFace back"></div>	
+				</div>	
+			</td>
+			<td>
+				<div class="cardCover">
+					<div class="cardFace front"></div>
+					<div class="cardFace back"></div>	
+				</div>	
+			</td>
+			<td>
+				<div class="cardCover">
+					<div class="cardFace front"></div>
+					<div class="cardFace back"></div>	
+				</div>	
+			</td>
+			<td>
+				<div class="cardCover">
+					<div class="cardFace front"></div>
+					<div class="cardFace back"></div>	
+				</div>	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class="cardCover">
+					<div class="cardFace front"></div>
+					<div class="cardFace back"></div>	
+				</div>	
+			</td>
+			<td>
+				<div class="cardCover">
+					<div class="cardFace front"></div>
+					<div class="cardFace back"></div>	
+				</div>	
+			</td>
+			<td>
+				<div class="cardCover">
+					<div class="cardFace front"></div>
+					<div class="cardFace back"></div>	
+				</div>	
+			</td>
+			<td>
+				<div class="cardCover">
+					<div class="cardFace front"></div>
+					<div class="cardFace back"></div>	
+				</div>	
+			</td>
+			<td>
+				<div class="cardCover">
+					<div class="cardFace front"></div>
+					<div class="cardFace back"></div>	
+				</div>	
+			</td>
+		</tr>		
+	</table>
+</body>
+</html>
+	
